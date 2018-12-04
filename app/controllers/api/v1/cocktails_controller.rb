@@ -26,20 +26,31 @@ module Api
         render json: cocktail_json
       end
 
-      # def create
-      #   byebug
-      # end
+      def create
+        # byebug
+        @cocktail = Cocktail.create(cocktail_params)
+        render json: @cocktail
+      end
 
       def edit
-
+        @cocktail = Cocktail.find(params[:id])
       end
 
       def update
-
+        @cocktail = Cocktail.find(params[:id].to_i)
+        @proportion = Proportion.last
+        byebug
+        @cocktail.update(cocktail_params)
+        # @cocktail.proportions << @proportion
+        render json: @cocktail
       end
 
       def destroy
 
+      end
+
+      def cocktail_params
+        params.require(:cocktail).permit(:id, :name, :description, :instructions)
       end
     end
   end
