@@ -9,8 +9,16 @@ module Api
       def create
         # byebug
         @proportion = Proportion.create(proportion_params)
-        # @cocktail.proportions << @proportion
-        render json: @cocktail
+
+        render json: @proportion
+      end
+
+      def update
+        @proportion = Proportion.find_by(cocktail_id: params[:cocktail_id].to_i)
+        # byebug
+        @proportion.update(proportion_params)
+        # @proportion.proportions << @proportion
+        render json: @proportion
       end
 
       def proportion_params

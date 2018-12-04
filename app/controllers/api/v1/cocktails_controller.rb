@@ -38,10 +38,9 @@ module Api
 
       def update
         @cocktail = Cocktail.find(params[:id].to_i)
-        @proportion = Proportion.last
-        byebug
+        # byebug
         @cocktail.update(cocktail_params)
-        # @cocktail.proportions << @proportion
+      
         render json: @cocktail
       end
 
@@ -50,7 +49,7 @@ module Api
       end
 
       def cocktail_params
-        params.require(:cocktail).permit(:id, :name, :description, :instructions)
+        params.require(:cocktail).permit(:id, :name, :description, :instructions, :proportions)
       end
     end
   end
